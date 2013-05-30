@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1= title
+	p #{subtitle}にようこぞ
+	
+	br
+	form(METHOD="LINK", ACTION="/fbauth")
+		input(type="submit", value="Login with facebook", class='btn btn-large btn-primary')
+	
+	

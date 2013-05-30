@@ -108,9 +108,11 @@ app.get('/logout', function(req, res){
 	req.logOut();
 	res.redirect('/');
 });
+
 app.get('/error', function(req,res){
 	res.send(401,'{err: bad login}');
 });
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Kaizen server listening on port ' + app.get('port'));
@@ -118,6 +120,6 @@ http.createServer(app).listen(app.get('port'), function(){
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    res.redirect('/error');
+    res.redirect('/');
 }
 

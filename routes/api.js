@@ -51,6 +51,7 @@ exports.addTask = function (request, response) {
 	});	
 };
 
+
 //OBS
 //currently only updated dueDate and completed
 exports.updateTask = function(request, response){
@@ -65,7 +66,7 @@ exports.updateTask = function(request, response){
 	    	
 	    	doc.completed = data.completed;
 	    	doc.dueDate = data.dueDate;
-	    	
+
 	    	doc.save(function(err){
 				if(err){
 					throw err;

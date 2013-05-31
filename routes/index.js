@@ -10,7 +10,3 @@ exports.index = function(req, res){
 exports.list = function(req, res){
   	res.render('list', { title: 'Kaizen', subtitle: '改善' });
 };
-
-exports.loggedin = function(req,res){
-	res.render('loggedin', { title: 'Kaizen', subtitle: '改善', user: req.user});
-};

@@ -34,6 +34,7 @@ block content
 
 			table(class='table table-striped')
 				thead
+
 				tbody(data-bind="template: { name: 'taskTemplate', foreach: dailyTasks}")
 
 			br
@@ -47,6 +48,7 @@ block content
 
 			table(class='table table-striped')
 				thead
+
 				tbody(data-bind="template: { name: 'taskTemplate', foreach: longerTasks}")
 
 			br
@@ -62,8 +64,7 @@ block content
 			table(class='table table-striped')
 				thead
 				tbody(data-bind="template: { name: 'completeTaskTemplate', foreach: completedTasks}")
-					
-						
+
 
 		div(class='span6')		
 			div(class="span3")

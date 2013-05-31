@@ -10,4 +10,3 @@ exports.index = function(req, res){
 exports.list = function(req, res){
   	res.render('list', { title: 'Kaizen', subtitle: '改善' });
 };
-

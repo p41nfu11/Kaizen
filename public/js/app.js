@@ -95,7 +95,6 @@ function AppViewModel() {
     self.isShortTask = function(created, due)
     {
     	var TWO_DAYS = 60 * 60 * 1000 * 24;
-
     	if((new Date(due) - new Date(created)) < TWO_DAYS)
     		return true;
     	else

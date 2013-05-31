@@ -2,6 +2,32 @@ extends layout
 
 block content
 
+	script(type="text/html", id="taskTemplate")
+		tr
+			td
+				input(type='checkbox',data-bind='checked:completed,click:$parent.checkboxClicked')
+			td
+				span(class="badge badge-important", data-bind="if: $parent.isDue($data)") due
+				&nbsp;
+				span(data-bind="text: title")
+			td
+				button(class='btn btn-mini',type='button', data-bind='click:$parent.snoozeTaskWasClicked, visible:$parent.isDue($data)')
+					i(class="icon-time")
+				&nbsp;
+				button(class='btn btn-mini',type='button', data-bind='click:$parent.delTask, visible:$parent.edit')
+					i(class="icon-remove")
+
+				
+	script(type="text/html", id="completeTaskTemplate")
+		tr
+			td
+				input(type='checkbox',data-bind='checked:completed,click:$parent.checkboxClicked')
+			td
+				span(data-bind="text: title")
+			td
+				button(class='btn btn-mini',type='button', data-bind='click:$parent.delTask, visible:$parent.edit')
+					i(class="icon-remove")
+
 	h1= title
 	div(class='span12')	
 		div(class='span6')
@@ -9,18 +35,7 @@ block content
 
 			table(class='table table-striped')
 				thead
-				tbody(data-bind="foreach: dailyTasks")
-					tr
-						td
-							input(type='checkbox',data-bind='checked:completed,click:$parent.checkboxClicked')
-						td
-							span(class="badge badge-important", data-bind="if: $parent.isDue($data)") due
-							&nbsp;
-							span(data-bind="text: title")
-					
-						td
-							button(class='btn btn-mini',type='button', data-bind='click:$parent.delTask, visible:$parent.edit')
-								i(class="icon-remove")
+				tbody(data-bind="template: { name: 'taskTemplate', foreach: dailyTasks}")
 
 			br
 			form(class='form')
@@ -33,16 +48,7 @@ block content
 
 			table(class='table table-striped')
 				thead
-				tbody(data-bind="foreach: longerTasks")
-					tr
-						td
-							input(type='checkbox',data-bind='checked:completed,click:$parent.checkboxClicked')
-						td
-							span(data-bind="text: title")
-					
-						td
-							button(class='btn btn-mini',type='button', data-bind='click:$parent.delTask, visible:$parent.edit')
-								i(class="icon-remove")
+				tbody(data-bind="template: { name: 'taskTemplate', foreach: longerTasks}")
 
 			br
 			form(class='form')
@@ -56,16 +62,9 @@ block content
 			br
 			table(class='table table-striped')
 				thead
-				tbody(data-bind="foreach: completedTasks")
-					tr
-						td
-							input(type='checkbox',data-bind='checked:completed,click:$parent.checkboxClicked')
-						td
-							span(data-bind="text: title")
+				tbody(data-bind="template: { name: 'completeTaskTemplate', foreach: completedTasks}")
 					
-						td
-							button(class='btn btn-mini',type='button', data-bind='click:$parent.delTask, visible:$parent.edit')
-								i(class="icon-remove")
+						
 
 		div(class='span6')		
 			div(class="span3")

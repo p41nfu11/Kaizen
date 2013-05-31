@@ -51,6 +51,8 @@ exports.addTask = function (request, response) {
 	});	
 };
 
+//OBS
+//currently only updated dueDate and completed
 exports.updateTask = function(request, response){
 	var data = request.body;
 	task.findOne({ _id:data._id },function(err,doc){
@@ -62,6 +64,8 @@ exports.updateTask = function(request, response){
 	    	console.log('found one. Updating...');
 	    	
 	    	doc.completed = data.completed;
+	    	doc.dueDate = data.dueDate;
+	    	
 	    	doc.save(function(err){
 				if(err){
 					throw err;

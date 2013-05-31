@@ -53,12 +53,13 @@ function AppViewModel() {
         }
     }
 
+
     self.checkboxClicked = function(data){
-    	console.log(data);
     	$.post('api/updateTask', data, function(updatedTask) {
             self.removeTaskFromList(data, !data.completed);
             self.addTaskToList(data);
 		});	
+        //returns true so as to notify the checkbox to mark/unmark itself (can not be done in callback)
 		return true;
     };
 
@@ -75,12 +76,18 @@ function AppViewModel() {
             else
                 self.titleDaily('');
 		});	
-		
     };
+
+    self.snoozeTaskWasClicked = function(data)
+    {   
+        var today = new Date();
+        var tomorrow = new Date(Date.parse(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)));
+
+        self.updateDueDate(data, new Date(tomorrow));
+    }
 
     self.delTask = function(data){
 		$.post('api/delTask', data, function(response) {
-			console.log(data);
 			self.removeTaskFromList(data, data.completed);
 		});		
     };
@@ -100,6 +107,14 @@ function AppViewModel() {
             return true;
         else
             return false;
+    }
+
+    //due is Date()
+    self.updateDueDate = function(task, newDue)
+    {
+        task.dueDate = newDue;
+        $.post('api/updateTask', task, function(updatedTask) {
+        });
     }
 }
 
